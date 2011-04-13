@@ -1,0 +1,14 @@
+/*
+Theme Name: Alfred
+Theme URI: http://redfourzero.com/alfred
+Description: A WordPress theme that turns your blog into a full blown project manager.
+Version: 0.1
+Author: Red Forty
+Author URI: http://redfourzero.com
+License: GNU General Public License v2.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: 
+Template: twentyten
+/* --------------------------------------------- */
+
+@import url("../twentyten/style.css");
