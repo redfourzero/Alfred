@@ -49,3 +49,43 @@ function alfred_task_post_type() {
 	);
 }
 add_action( 'alfred_register_post_types', 'alfred_task_post_type' );
+
+if ( ! class_exists( 'Alfred_Task_Status' ) ) :
+/**
+ * Create the status taxonomy.
+ * 
+ * @since Alfred 0.1
+ */
+class Alfred_Task_Status extends Alfred_Taxonomy {
+	/**
+	 * Just create the name, slug, and labels. The rest is 
+	 * done automagically.
+	 *
+	 * @since Alfred 0.1
+	 */
+	function __construct() {
+		global $alfred;
+		
+		parent::__construct(
+			'task',
+			'task_status',
+			'status',
+			array(
+				'name' => __( 'Status', 'quality' ),
+				'singular_name' => __( 'Status', 'quality' ),
+				'search_items' => __( 'Search Stati', 'quality' ),
+				'popular_items' => __( 'Popular Stati', 'quality' ),
+				'all_items' => __( 'All Stati', 'quality' ),
+				'update_item' => __( 'Update Status', 'quality' ),
+				'add_new_item' => __( 'Add New Status', 'quality' ),
+				'new_item_name' => __( 'New Status Name', 'quality' ),
+				'edit_item' => __( 'Edit Status', 'quality' )
+			)
+		);
+		
+		$this->actions();
+	}
+}
+endif;
+
+$task_status = new Alfred_Task_Status;
