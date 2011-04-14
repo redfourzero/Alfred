@@ -21,7 +21,22 @@ if ( ! class_exists( 'alfred' ) ) :
  *
  * @since Alfred 0.1
  */
-class alfred {	
+class alfred {
+	/**
+	 * @var string Client post type id
+	 */
+	var $client_post_type;
+
+	/**
+	 * @var string Project post type id
+	 */
+	var $project_post_type;
+
+	/**
+	 * @var string Task post type id
+	 */
+	var $task_post_type;
+  
 	function __construct() {
 		// Make sure P2P is activated.
 		if ( ! function_exists( '_p2p_init' ) ) {
@@ -36,7 +51,12 @@ class alfred {
 	}
 	
 	function _setup_globals() {
-		
+		/** Identifiers *******************************************************/
+
+		// Post type identifiers
+		$this->client_post_type = apply_filters( 'alfred_client_post_type', 'client' );
+		$this->project_post_type = apply_filters( 'alfred_project_post_type', 'project' );
+		$this->task_post_type = apply_filters( 'alfred_task_post_type', 'task' );
 	}
 	
 	function _setup_files() {
@@ -107,10 +127,6 @@ class alfred {
 	
 	function rewrite_rules() {
 		do_action( 'alfred_generate_rewrite_rules' );
-	}
-	
-	function component( $args ) {
-		return new Alfred_Component( $args );
 	}
 	
 	/**
