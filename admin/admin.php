@@ -38,7 +38,7 @@ class alfred_admin extends alfred {
 	 */
 	function _setup_files() {
 		// Load the main files.
-		foreach ( array( 'general', 'settings', 'metaboxes' ) as $file ) {
+		foreach ( array( 'general', 'settings', 'metaboxes', 'tabs/jf-metabox-tabs' ) as $file ) {
 			require_once( $file . '.php' );
 		}
 	}
