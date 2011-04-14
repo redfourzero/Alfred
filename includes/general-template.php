@@ -1,7 +1,7 @@
 <?php
 
 function alfred_get_relation( $post_type = '', $args = array() ) {
-	global $alfred, $post;
+	global $alfred, $post, $wp_query;
 	
 	$defaults = array(
 		'connected' => $post->ID,
@@ -11,26 +11,26 @@ function alfred_get_relation( $post_type = '', $args = array() ) {
 	$args = wp_parse_args( $args, $defaults );
 	extract( $args );
 	
-	$connected = new WP_Query( array(
+	$connected = get_posts( array(
 	  'post_type' => $post_type,
 	  'connected' => $connected
 	) );
 	
 	$display = array();
 	
-	while( $connected->have_posts() ) : $connected->the_post();
+	foreach( $connected as $item ) {
 		$display[] = sprintf(
 			'<a href="%1$s" title="%2$s" rel="bookmark">%3$s</a>', 
-			get_permalink( get_the_ID() ), 
-			esc_attr__( 'Permalink to %s', 'alfred' ), the_title_attribute( 'echo=0' ), 
-			get_the_title() 
+			get_permalink( $item->ID ), 
+			esc_attr__( 'Permalink to %s', 'alfred' ), get_the_title( $item->ID ), 
+			get_the_title( $item->ID ) 
 		);
-	endwhile;
+	}
 	
 	return implode( $separator, $display );
 }
 
-if ( !function_exists( 'alfred__taxonomy' ) ) :
+if ( !function_exists( 'alfred_taxonomy' ) ) :
 /**
  * Get the status of a ticket.
  *
@@ -42,9 +42,9 @@ function alfred_taxonomy( $taxonomy, $format = 'term_id', $post_id = null ) {
 	
 	if( empty( $post_id ) )
 		$post_id = $post->ID;
-	
+
 	$terms = get_the_terms( $post_id, $taxonomy );
-	
+
 	if( empty( $terms ) )
 		return false;
 	
