@@ -7,12 +7,14 @@
  * @since Alfred 0.1
  */
 function alfred_projects_2_clients() {
+	global $alfred;
+	
     if ( !function_exists( 'p2p_register_connection_type' ) )
         return;
 
     p2p_register_connection_type( array( 
-        'from' => 'project',
-        'to' => 'client',
+        'from' => $alfred->project_post_type,
+        'to' => $alfred->client_post_type,
 		'title' => array(
 			'from' => __( 'Client', 'alfred' )
 		),
@@ -29,12 +31,14 @@ add_action( 'alfred_init', 'alfred_projects_2_clients', 100 );
  * @since Alfred 0.1
  */
 function alfred_tasks_2_projects() {
+	global $alfred;
+	
     if ( !function_exists( 'p2p_register_connection_type' ) )
         return;
 
     p2p_register_connection_type( array( 
-        'from' => 'task',
-        'to' => 'project',
+        'from' => $alfred->task_post_type,
+        'to' => $alfred->project_post_type,
 		'title' => array(
 			'from' => __( 'Project', 'alfred' )
 		),
