@@ -6,7 +6,8 @@
 					<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'alfred' ) ); ?>
 
 					<div class="entry-utility">
-						<?php printf( 'Task(s): %s', alfred_get_relation( 'task' ) ); ?>
+						<?php printf( '<strong>Task(s):</strong> %s', alfred_get_relation( 'task' ) ); ?> <br />
+						<?php printf( '<strong>Status:</strong> %s', alfred_taxonomy( 'project_status', 'name' ) ); ?>
 					</div><!-- .entry-utility -->
 				</div><!-- #post-## -->
 					

@@ -6,7 +6,8 @@
 					<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'alfred' ) ); ?>
 
 					<div class="entry-utility">
-						<?php alfred_responsibility(); ?>
+						<?php alfred_responsibility(); ?> <br />
+						<?php printf( '<strong>Status:</strong> %s', alfred_taxonomy( 'task_status', 'name' ) ); ?>
 					</div><!-- .entry-utility -->
 				</div><!-- #post-## -->
 					
