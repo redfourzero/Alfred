@@ -19,7 +19,7 @@ function alfred_projects_2_clients() {
 		'prevent_duplicates' => false,
     ) );
 }
-add_action( 'init', 'alfred_projects_2_clients', 100 );
+add_action( 'alfred_init', 'alfred_projects_2_clients', 100 );
 
 /**
  * Link Tasks to Projects
@@ -41,4 +41,4 @@ function alfred_tasks_2_projects() {
 		'prevent_duplicates' => false,
     ) );
 }
-add_action( 'init', 'alfred_tasks_2_projects', 100 );
+add_action( 'alfred_init', 'alfred_tasks_2_projects', 100 );
