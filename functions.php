@@ -61,7 +61,7 @@ class alfred {
 	
 	function _setup_files() {
 		// Load the files
-		foreach ( array( 'classes', 'p2p', 'options' ) as $file )
+		foreach ( array( 'p2p', 'classes', 'options' ) as $file )
 			require_once( STYLESHEETPATH . '/includes/' . $file . '.php' );
 
 		// Load the function and template files
@@ -75,21 +75,37 @@ class alfred {
 			require_once( STYLESHEETPATH . '/admin/admin.php' );
 	}
 	
-	function _setup_actions() {
-		// Textdomain
-		add_action( 'alfred_init', array( $this, 'textdomain' ) );
-		
+	function _setup_actions() {		
 		// Custom Post Types
-		add_action( 'alfred_init', array( $this, 'post_types' ) );
+		add_action( 'alfred_init', array( $this, 'post_types' ), 1 );
 		
 		// Custom Taxonomies
-		add_action( 'alfred_init', array( $this, 'tax' ) );
+		add_action( 'alfred_init', array( $this, 'tax' ), 2 );
 		
 		// Rewrite Tags
-		add_action( 'alfred_init', array( $this, 'rewrite_tags' ) );
+		add_action( 'alfred_init', array( $this, 'rewrite_tags' ), 3 );
 		
 		// Rewrite Rules
-		add_action( 'alfred_init', array( $this, 'rewrite_rules' ) );
+		add_action( 'alfred_init', array( $this, 'rewrite_rules' ), 4 );
+		
+		// Textdomain
+		add_action( 'alfred_init', array( $this, 'textdomain' ), 5 );
+	}
+		
+	function post_types() {
+		do_action( 'alfred_register_post_types' );
+	}
+	
+	function tax() {
+		do_action( 'alfred_register_taxonomies' );
+	}
+	
+	function rewrite_tags() {
+		do_action( 'alfred_add_rewrite_tags' );
+	}
+	
+	function rewrite_rules() {
+		do_action( 'alfred_generate_rewrite_rules' );
 	}
 	
 	/**
@@ -113,22 +129,6 @@ class alfred {
 		return false;
 	}
 	
-	function post_types() {
-		do_action( 'alfred_register_post_types' );
-	}
-	
-	function tax() {
-		do_action( 'alfred_register_taxonomies' );
-	}
-	
-	function rewrite_tags() {
-		do_action( 'alfred_add_rewrite_tags' );
-	}
-	
-	function rewrite_rules() {
-		do_action( 'alfred_generate_rewrite_rules' );
-	}
-	
 	/**
 	 * Alfred requires the Posts 2 Posts plugin in order
 	 * to handle his business. He can do a lot, but not everything.
@@ -146,4 +146,4 @@ $alfred = new alfred;
 function alfred_init() {
 	do_action( 'alfred_init' );
 }
-add_action( 'init', 'alfred_init' );
+add_action( 'init', 'alfred_init', 1 );
