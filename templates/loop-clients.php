@@ -6,7 +6,7 @@
 					<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'alfred' ) ); ?>
 
 					<div class="entry-utility">
-						<?php printf( 'Project(s): %s', '' ); ?>
+						<?php printf( 'Project(s): %s', alfred_get_relation( 'project' ) ); ?>
 					</div><!-- .entry-utility -->
 				</div><!-- #post-## -->
 					
