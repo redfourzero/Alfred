@@ -39,8 +39,8 @@ class Alfred {
   
 	function __construct() {
 		// Make sure P2P is activated.
-		if ( ! function_exists( '_p2p_init' ) ) {
-			add_action( 'admin_notices', array( 'alfred_needs_p2p' ) );
+		if ( !function_exists( 'p2p_register_connection_type' ) ) {
+			add_action( 'admin_notices', array( $this, 'alfred_needs_p2p' ) );
 			
 			return false;
 		}
