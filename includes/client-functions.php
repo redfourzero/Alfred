@@ -37,7 +37,7 @@ function alfred_client_post_type() {
 			
 			),
 			'menu_position' => 5,
-			//'menu_icon' => '',
+			'menu_icon' => '',
 			'public' => true,
 			'show_ui' => true,
 			'can_export' => true,
