@@ -15,13 +15,13 @@
 // Current version of Alfred.
 define( 'ALFRED_VERSION', '0.1' );
 
-if ( ! class_exists( 'alfred' ) ) :
+if ( ! class_exists( 'Alfred' ) ) :
 /**
  * Oh Alfred, you're so helpful.
  *
  * @since Alfred 0.1
  */
-class alfred {
+class Alfred {
 	/**
 	 * @var string Client post type id
 	 */
@@ -60,8 +60,8 @@ class alfred {
 	}
 	
 	function _setup_files() {
-		// Load the files
 		foreach ( array( 'p2p', 'classes', 'options' ) as $file )
+		// Load the files
 			require_once( STYLESHEETPATH . '/includes/' . $file . '.php' );
 
 		// Load the function and template files
@@ -141,7 +141,7 @@ class alfred {
 }
 endif;
 
-$alfred = new alfred;
+$alfred = new Alfred;
 
 function alfred_init() {
 	do_action( 'alfred_init' );

@@ -29,3 +29,26 @@ function alfred_get_relation( $post_type = '', $args = array() ) {
 	
 	return implode( $separator, $display );
 }
+
+if ( !function_exists( 'alfred__taxonomy' ) ) :
+/**
+ * Get the status of a ticket.
+ *
+ * @since Alfred 0.1
+ * @uses get_the_terms
+ */
+function alfred_taxonomy( $taxonomy, $format = 'term_id', $post_id = null ) {
+	global $post;
+	
+	if( empty( $post_id ) )
+		$post_id = $post->ID;
+	
+	$terms = get_the_terms( $post_id, $taxonomy );
+	
+	if( empty( $terms ) )
+		return false;
+	
+	foreach( $terms as $term )	
+		return $term->$format;
+}
+endif;
