@@ -12,3 +12,18 @@ Template: twentyten
 /* --------------------------------------------- */
 
 @import url("../twentyten/style.css");
+
+#content h2.section-title,
+#content h3.client-title,
+#content h3.project-title,
+#content h3.task-title {
+	margin-bottom:0;
+}
+
+#content h2.section-title {
+	margin-top:30px;
+}
+
+.hentry {
+	margin:0;
+}

@@ -12,8 +12,8 @@ get_header(); ?>
 
 		<div id="container">
 			<div id="content" role="main">
-
-			<?php get_template_part( 'dashboard', ( is_user_logged_in() ? 'logged-in' : '' ) ); ?>
+			
+				<?php get_template_part( 'dashboard', ( is_user_logged_in() ? 'logged-in' : '' ) ); ?>
 
 			</div><!-- #content -->
 		</div><!-- #container -->
