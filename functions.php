@@ -65,7 +65,7 @@ class alfred {
 			require_once( STYLESHEETPATH . '/includes/' . $file . '.php' );
 
 		// Load the function and template files
-		foreach ( array( 'general', 'client', 'project', 'task' ) as $file ) {
+		foreach ( array( 'general', 'client', 'project', 'task', 'user' ) as $file ) {
 			require_once( STYLESHEETPATH . '/includes/' . $file . '-functions.php' );
 			require_once( STYLESHEETPATH . '/includes/' . $file . '-template.php'  );
 		}
