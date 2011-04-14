@@ -12,7 +12,11 @@ function alfred_projects_2_clients() {
 
     p2p_register_connection_type( array( 
         'from' => 'project',
-        'to' => 'client'
+        'to' => 'client',
+		'title' => array(
+			'from' => __( 'Client', 'alfred' )
+		),
+		'prevent_duplicates' => false,
     ) );
 }
 add_action( 'init', 'alfred_projects_2_clients', 100 );
@@ -30,7 +34,11 @@ function alfred_tasks_2_projects() {
 
     p2p_register_connection_type( array( 
         'from' => 'task',
-        'to' => 'project'
+        'to' => 'project',
+		'title' => array(
+			'from' => __( 'Project', 'alfred' )
+		),
+		'prevent_duplicates' => false,
     ) );
 }
 add_action( 'init', 'alfred_tasks_2_projects', 100 );
