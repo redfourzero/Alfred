@@ -6,7 +6,7 @@
 					<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'alfred' ) ); ?>
 
 					<div class="entry-utility">
-						
+						<?php alfred_responsibility(); ?>
 					</div><!-- .entry-utility -->
 				</div><!-- #post-## -->
 					
