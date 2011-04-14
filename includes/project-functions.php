@@ -48,11 +48,6 @@ function alfred_project_post_type() {
 }
 add_action( 'alfred_register_post_types', 'alfred_project_post_type' );
 
-/**
- * Create the Project Status Taxonomy.
- *
- * @since Alfred 0.1
- */
 if ( ! class_exists( 'Alfred_Project_Status' ) ) :
 /**
  * Create the status taxonomy.
