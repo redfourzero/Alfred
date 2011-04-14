@@ -27,7 +27,9 @@ function alfred_task_post_type() {
 				'not_found_in_trash' => __( 'No tasks found in the trash.', 'alfred' )
 			),
 			'supports' => array(
-			
+				'title',
+				'editor',
+				'assign'
 			),
 			'rewrite' => array(
 				'slug' => 'task',
