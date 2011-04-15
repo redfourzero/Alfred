@@ -14,7 +14,7 @@
 function alfred_metabox_client_contact() {
 	global $alfred;
 	
-	add_meta_box( 'contact', __( 'Contact Information', 'alfred' ), '_alfred_metabox_client_contact', $alfred->client_post_type, 'normal', 'high' );
+	add_meta_box( 'contact', __( 'Client Information', 'alfred' ), '_alfred_metabox_client_contact', $alfred->client_post_type, 'normal', 'high' );
 }
 add_action( 'add_meta_boxes', 'alfred_metabox_client_contact' );
 
@@ -26,6 +26,8 @@ add_action( 'add_meta_boxes', 'alfred_metabox_client_contact' );
 	 */
 	function _alfred_metabox_client_contact( $post ) {
 		global $post;
+		
+		$contact = alfred_client_contact_info( $post->ID );
 ?>
 			<div class="metabox-tabs-div">
 				<ul class="metabox-tabs" id="metabox-tabs">
@@ -33,29 +35,48 @@ add_action( 'add_meta_boxes', 'alfred_metabox_client_contact' );
 					<li class="tab2"><a href="javascript:void(null);"><?php _e( 'Details', 'alfred' ); ?></a></li>
 				</ul>
 				<div class="tab1">
-					<h4 class="heading">Tab 1</h4>
+					<h4 class="heading"><?php _e( 'Contact Information', 'alfred' ); ?></h4>
 					<table class="form-table">
 						<tr>
-							<th scope="row"><label for="jf_input1">Input 1</label></th>
-							<td><input type="text" id= "jf_input1" name="jf_input1"/></td>
+							<th scope="row">
+								<label for="alfred[client][contact][first_name]"><?php _e( 'Contact Name', 'alfred' ); ?></label>
+							</th>
+							<td>
+								<input type="text" id="alfred[client][contact][first_name]" name="alfred[client][contact][first_name]" style="width:100%" value="<?php echo esc_attr( $contact[ 'first_name' ] ); ?>" />
+								<p class="description"><?php _e( 'First Name', 'alfred' ); ?></p>
+							</td>
+							<td>
+								<input type="text" id="alfred[client][contact][last_name]" name="alfred[client][contact][last_name]" style="width:100%" value="<?php echo esc_attr( $contact[ 'last_name' ] ); ?>" />
+								<p class="description"><?php _e( 'Last Name', 'alfred' ); ?></p>
+							</td>
 						</tr>
 						<tr>
-							<th scope="row"><label for="jf_input2">Input 2</label></th>
-							<td><input type="text" id= "jf_input2" name="jf_input2"/></td>
+							<th scope="row">
+								<label for="alfred[client][contact][email]"><?php _e( 'Email Address', 'alfred' ); ?></label>
+							</th>
+							<td colspan="2">
+								<input type="text" id="alfred[client][contact][email]" name="alfred[client][contact][email]" class="code" style="width:100%" value="<?php echo esc_attr( $contact[ 'email' ] ); ?>" />
+								<p class="description"><?php _e( 'Separate multiple by commas.', 'alfred' ); ?></p>
+							</td>
 						</tr>
+						<tr>
+							<th scope="row"><label for="alfred[client][contact][home_phone]"><?php _e( 'Phone Number', 'alfred' ); ?></label></th>
+							<td>
+								<input type="text" id="alfred[client][contact][home_phone]" name="alfred[client][contact][home_phone]" style="width:100%" value="<?php echo esc_attr( $contact[ 'home_phone' ] ); ?>" />
+								<p class="description"><?php _e( 'Home Phone', 'alfred' ); ?></p>
+							</td>
+							<td>
+								<input type="text" id="alfred[client][contact][mobile_phone]" name="alfred[client][contact][mobile_phone]" style="width:100%" value="<?php echo esc_attr( $contact[ 'mobile_phone' ] ); ?>" />
+								<p class="description"><?php _e( 'Mobile', 'alfred' ); ?></p>
+							</td>
+						</tr>
+						<?php do_action( 'alfred_meta_contact_fields' ); ?>
 					</table>
 				</div>
 				<div class="tab2">
-					<h4 class="heading">Tab 2</h4>
+					<h4 class="heading"><?php _e( 'Details', 'alfred' ); ?></h4>
 					<table class="form-table">
-						<tr>
-							<th scope="row"><label for="jf_input3">Input 3</label></th>
-							<td><input type="text" id= "jf_input3" name="jf_input3"/></td>
-						</tr>
-						<tr>
-							<th scope="row"><label for="jf_input4">Input 4</label></th>
-							<td><input type="text" id= "jf_input4" name="jf_input4"/></td>
-						</tr>
+						
 					</table>
 				</div>
 			</div>
