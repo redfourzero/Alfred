@@ -151,7 +151,7 @@ class alfred_admin extends alfred {
 		global $alfred, $post;
 
 		// Icons for top level admin menus
-		$menu_icon_url = STYLESHEETPATH . '/icons/menu.png';
+		$menu_icon_url = get_stylesheet_directory_uri() . '/images/icons/menu.png';
 
 		// Top level menu classes
 		$client_class = sanitize_html_class( 'client' ); 
