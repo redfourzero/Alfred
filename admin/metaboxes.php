@@ -1,5 +1,6 @@
 <?php
 /**
+ * Create the Metaboxes.
  *
  * @since Alfred 0.1
  */
