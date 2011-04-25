@@ -28,7 +28,8 @@ add_action( 'add_meta_boxes', 'alfred_metabox_client_contact' );
 	function _alfred_metabox_client_contact( $post ) {
 		global $post;
 		
-		$contact = alfred_client_contact_info( $post->ID );
+		$contact = alfred_client_info( 'contact' );
+		$details = alfred_client_info( 'details' );
 ?>
 			<div class="metabox-tabs-div">
 				<ul class="metabox-tabs" id="metabox-tabs">
@@ -38,6 +39,7 @@ add_action( 'add_meta_boxes', 'alfred_metabox_client_contact' );
 				<div class="tab1">
 					<h4 class="heading"><?php _e( 'Contact Information', 'alfred' ); ?></h4>
 					<table class="form-table">
+						<?php do_action( 'alfred_meta_contact_fields_before' ); ?>
 						<tr>
 							<th scope="row">
 								<label for="alfred[client][contact][first_name]"><?php _e( 'Contact Name', 'alfred' ); ?></label>
@@ -71,13 +73,43 @@ add_action( 'add_meta_boxes', 'alfred_metabox_client_contact' );
 								<p class="description"><?php _e( 'Mobile', 'alfred' ); ?></p>
 							</td>
 						</tr>
-						<?php do_action( 'alfred_meta_contact_fields' ); ?>
+						<?php do_action( 'alfred_meta_contact_fields_after' ); ?>
 					</table>
 				</div>
 				<div class="tab2">
 					<h4 class="heading"><?php _e( 'Details', 'alfred' ); ?></h4>
 					<table class="form-table">
-						
+						<?php do_action( 'alfred_meta_detail_fields_before' ); ?>
+						<tr>
+							<th scope="row"><label for="alfred[client][details][street]"><?php _e( 'Address', 'alfred' ); ?></label></th>
+							<td>
+								<input type="text" id="alfred[client][details][country]" name="alfred[client][details][country]" style="width:100%" value="<?php echo esc_attr( $details[ 'country' ] ); ?>" />
+								<p class="description"><?php _e( 'Country', 'alfred' ); ?></p>
+							<td>
+								<input type="text" id="alfred[client][details][street]" name="alfred[client][details][street]" style="width:100%" value="<?php echo esc_attr( $details[ 'street' ] ); ?>" />
+								<p class="description"><?php _e( 'Street 1', 'alfred' ); ?></p>
+							</td>
+							<td>
+								<input type="text" id="alfred[client][details][street2]" name="alfred[client][details][street2]" style="width:100%" value="<?php echo esc_attr( $details[ 'street2' ] ); ?>" />
+								<p class="description"><?php _e( 'Street 2', 'alfred' ); ?></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row"></th>
+							<td>
+								<input type="text" id="alfred[client][details][city]" name="alfred[client][details][city]" style="width:100%" value="<?php echo esc_attr( $details[ 'city' ] ); ?>" />
+								<p class="description"><?php _e( 'City', 'alfred' ); ?></p>
+							</td>
+							<td>
+								<input type="text" id="alfred[client][details][state]" name="alfred[client][details][state]" style="width:100%" value="<?php echo esc_attr( $details[ 'state' ] ); ?>" />
+								<p class="description"><?php _e( 'State/Province', 'alfred' ); ?></p>
+							</td>
+							<td>
+								<input type="text" id="alfred[client][details][postal]" name="alfred[client][details][postal]" style="width:100%" value="<?php echo esc_attr( $details[ 'postal' ] ); ?>" />
+								<p class="description"><?php _e( 'Postal/Zip Code', 'alfred' ); ?></p>
+							</td>
+						</tr>
+						<?php do_action( 'alfred_meta_detail_fields_after' ); ?>
 					</table>
 				</div>
 			</div>

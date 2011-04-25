@@ -43,7 +43,26 @@ function alfred_client_post_type() {
 			'can_export' => true,
 			'capability_type' => 'post',
 			'query_var' => true
-		) 
+		)
 	);
 }
 add_action( 'alfred_register_post_types', 'alfred_client_post_type' );
+
+if ( ! function_exists( 'alfred_client_info' ) ) :
+/**
+ * Get general client meta information.
+ *
+ * Information is stored in a big "Client" array (currently) broken
+ * into two sections: "contact" and "details". Pass a section to this
+ * function to return an array of information associated with that client.
+ *
+ * @since Alfred 0.1
+ */
+function alfred_client_info( $section = 'contact' ) {
+	global $post;
+	
+	$info = get_post_meta( $post->ID, 'client', true );
+	
+	return $info[ $section ];
+}
+endif;
