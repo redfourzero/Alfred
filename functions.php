@@ -23,6 +23,11 @@ if ( ! class_exists( 'Alfred' ) ) :
  */
 class Alfred {
 	/**
+	 * @var array Basic supported features.
+	 */
+	var $features;
+	
+	/**
 	 * @var string Client post type id
 	 */
 	var $client_post_type;
@@ -53,6 +58,8 @@ class Alfred {
 	function _setup_globals() {
 		/** Identifiers *******************************************************/
 
+		$this->features = apply_filters( 'alfred_features', array( 'client', 'project', 'task' ) );
+		
 		// Post type identifiers
 		$this->client_post_type = apply_filters( 'alfred_client_post_type', 'client' );
 		$this->project_post_type = apply_filters( 'alfred_project_post_type', 'project' );
@@ -65,7 +72,7 @@ class Alfred {
 			require_once( STYLESHEETPATH . '/includes/' . $file . '.php' );
 
 		// Load the function and template files
-		foreach ( array( 'general', 'client', 'project', 'task', 'user' ) as $file ) {
+		foreach ( array( 'general', 'user' ) as $file ) {
 			require_once( STYLESHEETPATH . '/includes/' . $file . '-functions.php' );
 			require_once( STYLESHEETPATH . '/includes/' . $file . '-template.php'  );
 		}
@@ -75,35 +82,91 @@ class Alfred {
 			require_once( STYLESHEETPATH . '/admin/admin.php' );
 	}
 	
-	function _setup_actions() {		
+	function _setup_actions() {
+		// Set which features Alfred will use.
+		add_action( 'alfred_init', array( $this, 'features' ), 1 );
+		
+		// Load the files for the support features.
+		add_action( 'alfred_init', array( $this, 'load_features'), 5 );
+		
 		// Custom Post Types
-		add_action( 'alfred_init', array( $this, 'post_types' ), 1 );
+		add_action( 'alfred_init', array( $this, 'post_types' ), 10 );
 		
 		// Custom Taxonomies
-		add_action( 'alfred_init', array( $this, 'tax' ), 2 );
+		add_action( 'alfred_init', array( $this, 'tax' ), 15 );
 		
 		// Rewrite Tags
-		add_action( 'alfred_init', array( $this, 'rewrite_tags' ), 3 );
+		add_action( 'alfred_init', array( $this, 'rewrite_tags' ), 20 );
 		
 		// Rewrite Rules
-		add_action( 'alfred_init', array( $this, 'rewrite_rules' ), 4 );
+		add_action( 'alfred_init', array( $this, 'rewrite_rules' ), 25 );
 		
 		// Textdomain
-		add_action( 'alfred_init', array( $this, 'textdomain' ), 5 );
+		add_action( 'alfred_init', array( $this, 'textdomain' ), 30 );
 	}
-		
+	
+	/**
+	 * Add theme support for the default features for Alfred.
+	 * These can be removed in a child theme by firing a function
+	 * after this is called, and before {@link load_features()}is called.
+	 *
+	 * @since Alfred 0.1
+	 */
+	function features() {
+		foreach ( $this->features as $feature )
+			add_theme_support( $feature );
+	}
+	
+	/**
+	 * Load the features that the theme supports.
+	 *
+	 * These features can either be removed by filtering the features array via 'alfred_features'
+	 * Or by removing theme support through firing an action before {@link load_features}
+	 * is called.
+	 *
+	 * This should probably be simplified some.
+	 *
+	 * @since Alfred 0.1
+	 */
+	function load_features() {
+		foreach ( $this->features as $feature ) {
+			require_if_theme_supports( $feature, STYLESHEETPATH . '/includes/modules/' . $feature . '-functions.php' );
+			require_if_theme_supports( $feature, STYLESHEETPATH . '/includes/modules/' . $feature . '-template.php' );
+		}
+	}
+	
+	/**
+	 * Create a prioritized action for registering post types in Alfred.
+	 *
+	 * @since Alfred 0.1
+	 */
 	function post_types() {
 		do_action( 'alfred_register_post_types' );
 	}
 	
+	/**
+	 * Create a prioritized action for registering taxonomies in Alfred.
+	 *
+	 * @since Alfred 0.1
+	 */
 	function tax() {
 		do_action( 'alfred_register_taxonomies' );
 	}
 	
+	/**
+	 * Create a prioritized action for addign rewrite tags in Alfred.
+	 *
+	 * @since Alfred 0.1
+	 */
 	function rewrite_tags() {
 		do_action( 'alfred_add_rewrite_tags' );
 	}
 	
+	/**
+	 * Create a prioritized action for adding rewrite rules in Alfred.
+	 *
+	 * @since Alfred 0.1
+	 */
 	function rewrite_rules() {
 		do_action( 'alfred_generate_rewrite_rules' );
 	}
@@ -112,11 +175,6 @@ class Alfred {
 	 * Load the translation file for current language.
 	 *
 	 * @since Alfred 0.1
-	 *
-	 * @uses apply_filters() Calls 'alfred_locale' with the
-	 *                        {@link get_locale()} value
-	 * @uses load_textdomain() To load the textdomain
-	 * @return bool True on success, false on failure
 	 */
 	function textdomain() {
 		$locale = apply_filters( 'alfred_locale', get_locale() );
@@ -143,6 +201,12 @@ endif;
 
 $alfred = new Alfred;
 
+/**
+ * Create our own initiatlization action directly after
+ * the first init is fired in WordPress.
+ *
+ * @since Alfred 0.1
+ */
 function alfred_init() {
 	do_action( 'alfred_init' );
 }
