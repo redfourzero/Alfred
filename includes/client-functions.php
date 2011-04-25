@@ -1,5 +1,11 @@
 <?php
 /**
+ * Client-related functions. 
+ *
+ * @since Alfred 0.1
+ */
+ 
+/**
  * Create the Clients Custom Post Type.
  *
  * This function is fired when the `alfred_register_post_types` hook

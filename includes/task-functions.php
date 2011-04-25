@@ -1,5 +1,11 @@
 <?php
 /**
+ * Task-related functions. 
+ *
+ * @since Alfred 0.1
+ */
+ 
+/**
  * Create the Task Custom Post Type.
  *
  * This function is fired when the `alfred_register_post_types` hook
@@ -71,7 +77,7 @@ class Alfred_Task_Status extends Alfred_Taxonomy {
 			'task_status',
 			'status',
 			array(
-				'name' => __( 'Status', 'quality' ),
+				'name' => __( 'Stati', 'quality' ),
 				'singular_name' => __( 'Status', 'quality' ),
 				'search_items' => __( 'Search Stati', 'quality' ),
 				'popular_items' => __( 'Popular Stati', 'quality' ),
