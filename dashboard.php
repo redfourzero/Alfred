@@ -32,7 +32,7 @@ global $alfred; ?>
 	
 				<h2 class="section-title"><?php _e( 'Clients', 'alfred' ); ?></h2>
 				
-				<?php get_template_part( 'templates/loop', 'clients' ); ?>
+				<?php locate_template( array( 'templates/loop-clients.php', 'templates/loop.php' ), true ); ?>
 				
 <?php
 	// Projects
@@ -44,7 +44,7 @@ global $alfred; ?>
 	
 				<h2 class="section-title"><?php _e( 'Projects', 'alfred' ); ?></h2>
 				
-				<?php get_template_part( 'templates/loop', 'projects' ); ?>
+				<?php locate_template( array( 'templates/loop-projects.php', 'templates/loop.php' ), true ); ?>
 				
 <?php
 	// Tasks
@@ -56,4 +56,4 @@ global $alfred; ?>
 	
 				<h2 class="section-title"><?php _e( 'Tasks', 'alfred' ); ?></h2>
 				
-				<?php get_template_part( 'templates/loop', 'tasks' ); ?>
+				<?php locate_template( array( 'templates/loop-tasks.php', 'templates/loop.php' ), true ); ?>
