@@ -1,5 +1,16 @@
 <?php
 
+if ( !function_exists( 'alfred_get_relation' ) ) :
+/**
+ * Get all posts related to another post.
+ *
+ * @since Alfred 0.1
+ * @uses wp_parse_args()
+ * @uses get_posts()
+ * @uses get_permalink()
+ * @uses esc_attr__()
+ * @uses get_the_title()
+ */
 function alfred_get_relation( $post_type = '', $args = array() ) {
 	global $alfred, $post, $wp_query;
 	
@@ -29,13 +40,14 @@ function alfred_get_relation( $post_type = '', $args = array() ) {
 	
 	return implode( $separator, $display );
 }
+endif;
 
 if ( !function_exists( 'alfred_taxonomy' ) ) :
 /**
  * Get the status of a ticket.
  *
  * @since Alfred 0.1
- * @uses get_the_terms
+ * @uses get_the_terms()
  */
 function alfred_taxonomy( $taxonomy, $format = 'term_id', $post_id = null ) {
 	global $post;

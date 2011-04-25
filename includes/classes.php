@@ -103,7 +103,7 @@ class Alfred_Taxonomy {
 			global $post, $alfred;
 			
 			echo'<div class="input-text-wrap" style="margin:5px 0 0">';
-			
+
 			wp_dropdown_categories( array(
 				'taxonomy' => $this->taxonomy,
 				'hide_empty' => 0,
