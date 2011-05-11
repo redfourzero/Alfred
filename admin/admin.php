@@ -156,7 +156,8 @@ class alfred_admin extends alfred {
 		// Top level menu classes
 		$client_class = sanitize_html_class( 'client' ); 
 		$project_class = sanitize_html_class( 'project' ); 
-		$task_class = sanitize_html_class( 'task' ); ?>
+		$task_class = sanitize_html_class( 'task' ); 
+		$invoice_class = sanitize_html_class( 'invoice' ); ?>
 
 		<style type="text/css" media="screen">
 		/*<![CDATA[*/
@@ -186,6 +187,14 @@ class alfred_admin extends alfred {
 			#menu-posts-<?php echo $task_class; ?>:hover .wp-menu-image,
 			#menu-posts-<?php echo $task_class; ?>.wp-has-current-submenu .wp-menu-image {
 				background: url(<?php echo $menu_icon_url; ?>) no-repeat -64px 0;
+			}
+			
+			#menu-posts-<?php echo $invoice_class; ?> .wp-menu-image {
+				background: url(<?php echo $menu_icon_url; ?>) no-repeat -96px -32px;
+			}
+			#menu-posts-<?php echo $invoice_class; ?>:hover .wp-menu-image,
+			#menu-posts-<?php echo $invoice_class; ?>.wp-has-current-submenu .wp-menu-image {
+				background: url(<?php echo $menu_icon_url; ?>) no-repeat -96px 0;
 			}
 
 		/*]]>*/

@@ -52,16 +52,12 @@ add_action( 'menu_order', 'alfred_admin_menu_order' );
 add_action( 'custom_menu_order', '__return_true' );
 
 /**
- * Unset "Posts" from the menu.
+ * Remove unneeded menus from the Admin Menu.
  *
  * @since Alfred 0.1
  */
 function alfred_unset_post() {
-	global $menu;
-
-	if( isset( $menu[5] ) )
-		unset( $menu[5] );
-		
-	return $menu;
+	remove_menu_page( 'edit.php' );
+	remove_menu_page( 'link-manager.php' );
 }
 add_action( 'admin_menu', 'alfred_unset_post' );
