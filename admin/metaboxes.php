@@ -149,7 +149,7 @@ add_action( 'add_meta_boxes', 'alfred_metabox_task_assign' );
 		
 		<?php
 			wp_dropdown_users( array(
-				'show_option_none' => __( '&mdash;Assign&mdash;', 'alfred' ),
+				'show_option_none' => __( '&mdash;', 'alfred' ),
 				'selected' => $responsible,
 				'name' => 'alfred[responsibility]',
 				'id' => 'responsibility'
