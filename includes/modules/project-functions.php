@@ -42,7 +42,7 @@ function alfred_project_post_type() {
 			'taxonomies' => array(
 			
 			),
-			'menu_position' => 5,
+			'menu_position' => 6,
 			'menu_icon' => '',
 			'public' => true,
 			'show_ui' => true,
@@ -75,11 +75,11 @@ class Alfred_Project_Status extends Alfred_Taxonomy {
 			'project_status',
 			'status',
 			array(
-				'name' => __( 'Stati', 'quality' ),
+				'name' => __( 'States', 'quality' ),
 				'singular_name' => __( 'Status', 'quality' ),
-				'search_items' => __( 'Search Stati', 'quality' ),
-				'popular_items' => __( 'Popular Stati', 'quality' ),
-				'all_items' => __( 'All Stati', 'quality' ),
+				'search_items' => __( 'Search States', 'quality' ),
+				'popular_items' => __( 'Popular States', 'quality' ),
+				'all_items' => __( 'All States', 'quality' ),
 				'update_item' => __( 'Update Status', 'quality' ),
 				'add_new_item' => __( 'Add New Status', 'quality' ),
 				'new_item_name' => __( 'New Status Name', 'quality' ),
