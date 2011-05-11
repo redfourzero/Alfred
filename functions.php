@@ -41,6 +41,16 @@ class Alfred {
 	 * @var string Task post type id
 	 */
 	var $task_post_type;
+	
+	/**
+	 * @var string Invoice post type id
+	 */
+	var $invoice_post_type;
+	
+	/**
+	 * @var string Time post type id
+	 */
+	var $log_post_type;
   
 	function __construct() {
 		// Make sure P2P is activated.
@@ -58,12 +68,14 @@ class Alfred {
 	function _setup_globals() {
 		/** Identifiers *******************************************************/
 
-		$this->features = apply_filters( 'alfred_features', array( 'client', 'project', 'task' ) );
+		$this->features = apply_filters( 'alfred_features', array( 'client', 'project', 'task', 'invoice', 'log' ) );
 		
 		// Post type identifiers
 		$this->client_post_type = apply_filters( 'alfred_client_post_type', 'client' );
 		$this->project_post_type = apply_filters( 'alfred_project_post_type', 'project' );
 		$this->task_post_type = apply_filters( 'alfred_task_post_type', 'task' );
+		$this->invoice_post_type = apply_filters( 'alfred_invoice_post_type', 'invoice' );
+		$this->log_post_type = apply_filters( 'alfred_log_post_type', 'log' );
 	}
 	
 	function _setup_files() {
