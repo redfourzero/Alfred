@@ -86,7 +86,10 @@ class Alfred_Taxonomy {
 		$taxonomy = get_taxonomy( $this->taxonomy );
 		
 		remove_meta_box( "tagsdiv-{$this->taxonomy}", $this->post_type, "side" );
-
+		
+		if ( ! get_terms( array( $this->taxonomy ), array( 'hide_empty' => 0 ) ) )
+			return false;
+		
 		add_meta_box( $this->taxonomy, $taxonomy->labels->singular_name, array( $this, '_meta_box' ), $this->post_type, 'side', 'low' );
 	}
 	
