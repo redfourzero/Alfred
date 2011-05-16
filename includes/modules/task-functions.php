@@ -42,7 +42,7 @@ function alfred_task_post_type() {
 				'with_front' => false
 			),
 			'taxonomies' => array(
-			
+				
 			),
 			'menu_position' => 7,
 			'menu_icon' => '',
@@ -95,3 +95,48 @@ class Alfred_Task_Status extends Alfred_Taxonomy {
 endif;
 
 $task_status = new Alfred_Task_Status;
+
+if ( ! class_exists( 'Alfred_Task_Tags' ) ) :
+/**
+ * Create the tags taxonomy.
+ * 
+ * @since Alfred 0.1
+ */
+class Alfred_Task_Tags extends Alfred_Taxonomy {
+	/**
+	 * Just create the name, slug, and labels. The rest is 
+	 * done automagically.
+	 *
+	 * @since Alfred 0.1
+	 */
+	function __construct() {
+		global $alfred;
+		
+		parent::__construct(
+			'task',
+			'task_tags',
+			'tag',
+			array(
+				'name' => __( 'Tags', 'quality' ),
+				'singular_name' => __( 'tag', 'quality' ),
+				'search_items' => __( 'Search Tags', 'quality' ),
+				'popular_items' => __( 'Popular Tags', 'quality' ),
+				'all_items' => __( 'All Tags', 'quality' ),
+				'update_item' => __( 'Update Tags', 'quality' ),
+				'add_new_item' => __( 'Add New Tags', 'quality' ),
+				'new_item_name' => __( 'New Tag Name', 'quality' ),
+				'edit_item' => __( 'Edit Tag', 'quality' )
+			)
+		);
+		
+		$this->actions();
+	}
+	
+	function actions() {
+		// Register the taxonomy.
+		add_action( 'alfred_register_taxonomies', array( $this, 'register_taxonomy' ) );
+	}
+}
+endif;
+
+$task_tags = new Alfred_Task_Tags;
