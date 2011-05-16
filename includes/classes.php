@@ -111,7 +111,8 @@ class Alfred_Taxonomy {
 				'taxonomy' => $this->taxonomy,
 				'hide_empty' => 0,
 				'name' => "alfred[{$this->taxonomy}]",
-				'selected' => ( alfred_taxonomy( $this->taxonomy ) ? alfred_taxonomy( $this->taxonomy ) : '' )
+				'selected' => ( alfred_taxonomy( $this->taxonomy ) ? alfred_taxonomy( $this->taxonomy ) : '' ),
+				'show_option_none' => __( '&mdash;', 'alfred' )
 			) );
 				
 			echo'</div>';
