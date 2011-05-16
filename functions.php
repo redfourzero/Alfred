@@ -1,6 +1,6 @@
 <?php
 /**
- * Alfed. Everyone's favorite butler.
+ * Alfred. Everyone's favorite butler.
  *
  * This is a child theme for TwentyTen. It transforms the normal blogging
  * functionality of WordPress into a (reasonably) complete project manager.
