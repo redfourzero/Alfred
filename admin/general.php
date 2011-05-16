@@ -63,8 +63,8 @@ function alfred_unset_menus() {
 add_action( 'admin_menu', 'alfred_unset_menus' );
 
 /**
- * Instead of "Enter Title Here", it the title field
- * placeholder shold be more relevant to the current post type.
+ * Instead of "Enter Title Here", in the title field
+ * placeholder should be more relevant to the current post type.
  *
  * @since Alfred 0.1
  */
@@ -82,3 +82,28 @@ function alfred_enter_title_here( $title ) {
 	return $title;
 }
 add_filter( 'enter_title_here', 'alfred_enter_title_here' );
+
+/**
+ * Instead of "Publish" as the submit button label,
+ * create something a little more relevant.
+ *
+ * @since Alfred 0.1
+ */
+function alfred_publish_button( $translation, $text, $domain ) {
+	global $post;
+		
+	if ( $text == 'Publish' ) {
+		$translations = &get_translations_for_domain( $domain );
+		
+		if ( $post->post_type == 'client' ) {
+			return $translations->translate( 'Add Client' );
+		} elseif ( $post->post_type == 'project' ) {
+			return $translations->translate( 'Create Project' );
+		} elseif( $post->post_type == 'task' ) {
+			return $translations->translate( 'Add Task' );
+		}
+	}
+	
+	return $translation;
+}
+add_filter( 'gettext', 'alfred_publish_button', 10, 4 );
