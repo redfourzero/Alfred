@@ -163,19 +163,20 @@ add_action( 'alfred_add_metabox', 'alfred_metabox_task_assign' );
  *
  * @since Alfred 0.1
  */
-function alfred_metabox_task_due() {
+function alfred_metabox_due() {
 	global $alfred;
 	
-	add_meta_box( 'due', __( 'Due Date', 'alfred' ), '_alfred_metabox_task_due', $alfred->task_post_type, 'side', 'low' );
+	add_meta_box( 'due', __( 'Due Date', 'alfred' ), '_alfred_metabox_due', $alfred->project_post_type, 'side', 'low' );
+	add_meta_box( 'due', __( 'Due Date', 'alfred' ), '_alfred_metabox_due', $alfred->task_post_type, 'side', 'low' );
 }
-add_action( 'alfred_add_metabox', 'alfred_metabox_task_due' );
+add_action( 'alfred_add_metabox', 'alfred_metabox_due' );
 
 	/**
 	 * Callback for assigning a due date.
 	 *
 	 * @since Alfred 0.1
 	 */
-	function _alfred_metabox_task_due( $post ) {
+	function _alfred_metabox_due( $post ) {
 		global $wp_locale, $post;
 	
 		$due = get_post_meta( $post->ID, "due", true );
