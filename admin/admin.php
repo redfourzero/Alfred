@@ -122,7 +122,13 @@ class alfred_admin extends alfred {
 	function metabox_save() {
 		global $post;
 
-		if( ! isset( $_POST[ "alfred" ] ) || $post->post_type == 'revision' || ! current_user_can( 'edit_post', $post_id ) )
+		if( ! isset( $_POST[ "alfred" ] ) )
+			return false;
+		
+		if( $post->post_type == 'revision' )	
+			return false;
+			
+		if ( ! current_user_can( 'edit_post', $post_id ) )
 			return false;
 			
 		$meta = apply_filters( 'alfred_post_meta', $_POST[ "alfred" ] );
