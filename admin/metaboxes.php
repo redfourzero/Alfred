@@ -17,7 +17,7 @@ function alfred_metabox_client_contact() {
 	
 	add_meta_box( 'contact', __( 'Client Information', 'alfred' ), '_alfred_metabox_client_contact', $alfred->client_post_type, 'normal', 'high' );
 }
-add_action( 'add_meta_boxes', 'alfred_metabox_client_contact' );
+add_action( 'alfred_add_metabox', 'alfred_metabox_client_contact' );
 
 	/**
 	 * Callback for client contact information.
@@ -128,7 +128,7 @@ function alfred_metabox_task_assign() {
 	
 	add_meta_box( 'assign', __( 'Responsibility', 'alfred' ), '_alfred_metabox_task_assign', $alfred->task_post_type, 'side', 'low' );
 }
-add_action( 'add_meta_boxes', 'alfred_metabox_task_assign' );
+add_action( 'alfred_add_metabox', 'alfred_metabox_task_assign' );
 
 	/**
 	 * Callback for assigning responsibility. Creates a select box that
@@ -157,3 +157,48 @@ add_action( 'add_meta_boxes', 'alfred_metabox_task_assign' );
 		?>
 <?php	
 	}
+	
+/**
+ * Create a Due Date for the Task.
+ *
+ * @since Alfred 0.1
+ */
+function alfred_metabox_task_due() {
+	global $alfred;
+	
+	add_meta_box( 'due', __( 'Due Date', 'alfred' ), '_alfred_metabox_task_due', $alfred->task_post_type, 'side', 'low' );
+}
+add_action( 'alfred_add_metabox', 'alfred_metabox_task_due' );
+
+	/**
+	 * Callback for assigning a due date.
+	 *
+	 * @since Alfred 0.1
+	 */
+	function _alfred_metabox_task_due( $post ) {
+		global $wp_locale, $post;
+	
+		$due = get_post_meta( $post->ID, "due", true );
+		
+		$time_adj = current_time( 'timestamp' );
+		$day = ( $due_date ) ? date( 'd', $due_date ) : gmdate( 'd', $time_adj );
+		$month = ( $due_date ) ? date( 'm', $due_date ) : gmdate( 'm', $time_adj );
+		$year = ( $due_date ) ? date( 'Y', $due_date ) : gmdate( 'Y', $time_adj );
+		$hour = ( $due_date ) ? date( 'H', $due_date ) : gmdate( 'H', $time_adj );
+		$minute = ( $due_date ) ? date( 'i', $due_date ) : gmdate( 'i', $time_adj );
+?>
+	
+	<select name="dd_mm" id="dd_mm">
+		<?php for( $i = 1; $i < 13; $i++ ) : ?>
+			<option value="<?php echo zeroise( $i, 2 ); ?>"<?php if( $i == $month ) echo ' selected="selected"'; ?>><?php echo $wp_locale->get_month_abbrev( $wp_locale->get_month( $i ) ); ?></option>
+		<?php endfor; ?>
+	</select>
+	
+	<input type="text" name="dd_jj" id="dd_jj" maxlength="2" size="2" value="<?php echo $day; ?>" style="width:2.70em" placeholder="<?php echo $day; ?>" />,
+	<input type="text" name="dd_aa" id="dd_aa" maxlength="4" size="4" value="<?php echo $year; ?>" style="width:3.70em" placeholder="<?php echo $year; ?>" />
+	@
+	<input type="text" name="dd_hh" id="dd_hh" maxlength="2" size="2" value="<?php echo $hour; ?>" style="width:2.70em" placeholder="<?php echo $hour; ?>" /> : 
+	<input type="text" name="dd_mn" id="ddmn" maxlength="2" size="2" value="<?php echo $minute; ?>" style="width:2.70em" placeholder="<?php echo $minute; ?>" />
+<?php
+	}
+?>
