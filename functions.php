@@ -54,7 +54,7 @@ class Alfred {
   
 	function __construct() {
 		// Make sure P2P is activated.
-		if ( !function_exists( 'p2p_register_connection_type' ) ) {
+		if ( ! function_exists( 'p2p_register_connection_type' ) ) {
 			add_action( 'admin_notices', array( $this, 'alfred_needs_p2p' ) );
 			
 			return false;
@@ -206,7 +206,7 @@ class Alfred {
 	 * @since Alfred 0.1
 	 */
 	function alfred_needs_p2p() {
-		printf( '<div class="updated"><p>Alfred needs some help. Please install and activate the <a href="%s">Posts 2 Posts plugin</a> to continue.</p></div>', 'http://wordpress.org/extend/plugins/posts-to-posts/' );
+		printf( '<div class="updated"><p>Alfred needs some help. Please install and activate the <a href="%s">Posts 2 Posts plugin</a> to continue.</p></div>', admin_url( 'plugin-install.php?tab=search&type=term&s=Posts+2+Posts&plugin-search-input=Search+Plugins' ) );
 	}
 }
 endif;
