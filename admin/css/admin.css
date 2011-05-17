@@ -12,7 +12,14 @@
 		float:left;
 	}
 	
-	#stopwatch-clock input[type="button"] {
+	#stopwatch-clock input[type="button"],
+	#stopwatch-clock .status {
 		margin:15px 0 0 5px;
 		float:left;
+	}
+	
+	#stopwatch-clock .status {
+		color:#656565;
+		margin:19px 0 0 10px;
+		display:block;
 	}

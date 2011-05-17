@@ -10,6 +10,7 @@
 		clock.append('<input type="button" class="button start" value="Start" />');
 		clock.append('<input type="button" class="button stop" value="Stop" />');
 		clock.append('<input type="button" class="button reset" value="Reset" />');
+		clock.append( '<span class="status"></span>' );
 		
 		// We have to do some searching, so we'll do it here, so we only have to do it once.
 		var h = clock.find('.hr');

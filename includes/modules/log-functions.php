@@ -55,3 +55,48 @@ function alfred_log_post_type() {
 	);
 }
 add_action( 'alfred_register_post_types', 'alfred_log_post_type' );
+
+/**
+ * Set a default title when creating a log.
+ *
+ * @since Alfred 0.1
+ */
+function alfred_default_title( $title ) {
+	$title = esc_attr( gmdate( 'F j, Y g:H A' ) );
+	
+	return $title;
+}
+add_action( 'default_title', 'alfred_default_title' );
+
+/**
+ * Callback for starting the stopwatch.
+ *
+ * @since Alfred 0.1
+ */
+function alfred_stopwatch_start() {
+	global $post;
+	
+	$args = array(
+		'id' => absint( $_POST[ 'id' ] ),
+		'stopwatch' => array(
+			'seconds' => $_POST[ 'seconds' ],
+			'minutes' => $_POST[ 'minutes' ],
+			'hours'   => $_POST[ 'hours' ]
+		)
+	);
+	
+	update_post_meta( $args[ 'id' ], '_log_start', implode( ':', $args[ 'stopwatch' ] ) );
+	
+	$result = array(
+		'message' => __( 'You&#39;re on the clock! Get to work.', 'alfred' )
+	);
+	
+	echo json_encode( $result );
+	
+	// Exit
+	die();
+}
+if( is_user_logged_in() )
+	add_action( 'wp_ajax_alfred_stopwatch_start', 'alfred_stopwatch_start' );
+else
+	add_action( 'wp_ajax_nopriv_alfred_stopwatch_start', 'alfred_stopwatch_start' );
