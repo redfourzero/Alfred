@@ -88,15 +88,15 @@ function alfred_stopwatch_update() {
 	
 	$time = implode( ':', $args[ 'stopwatch' ] );
 	
+	update_post_meta( $args[ 'id' ], '_log_duration', $time );
+	
 	if ( $args[ 'update' ] == 'start' ) {
-		update_post_meta( $args[ 'id' ], '_log_start', $time );
 		$result = array(
 			'message' => __( 'You&#39;re on the clock! Get to work.', 'alfred' )
 		);
 	} elseif( $args[ 'update' ] == 'end' ) {
-		update_post_meta( $args[ 'id' ], '_log_end', $time );
 		$result = array(
-			'message' => sprintf( __( 'Nice! You worked for %s', 'alfred' ), $time )
+			'message' => sprintf( __( 'Nice! You worked for %s total.', 'alfred' ), $time )
 		);
 	}
 	

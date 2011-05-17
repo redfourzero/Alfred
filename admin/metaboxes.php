@@ -224,9 +224,12 @@ add_action( 'alfred_add_metabox', 'alfred_metabox_stopwatch' );
 	 */
 	function _alfred_metabox_stopwatch() {
 		global $alfred, $post;
+		
+		$duration = get_post_meta( $post->ID, '_log_duration', true );
 ?>
 		<div id="stopwatch-clock"></div>
 		<p><?php _e( 'Record how long you have been working.', 'alfred' ); ?></p>
+		<input type="hidden" name="_log_duration" id="_log_duration" value="<?php echo $duration; ?>" />
 <?php
 	}
 ?>
