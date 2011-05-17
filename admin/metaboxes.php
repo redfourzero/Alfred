@@ -202,4 +202,31 @@ add_action( 'alfred_add_metabox', 'alfred_metabox_due' );
 	<input type="text" name="dd_mn" id="ddmn" maxlength="2" size="2" value="<?php echo $minute; ?>" style="width:2.70em" placeholder="<?php echo $minute; ?>" />
 <?php
 	}
+	
+/** Time Tracking ****************************************************/
+
+/**
+ * Create a Stop Watch for Time Tracking.
+ *
+ * @since Alfred 0.1
+ */
+function alfred_metabox_stopwatch() {
+	global $alfred;
+	
+	add_meta_box( 'stopwatch', __( 'Time Tracking', 'alfred' ), '_alfred_metabox_stopwatch', $alfred->log_post_type, 'normal', 'high' );
+}
+add_action( 'alfred_add_metabox', 'alfred_metabox_stopwatch' );
+
+	/**
+	 * Callback for the stopwatch.
+	 *
+	 * @since Alfred 0.1
+	 */
+	function _alfred_metabox_stopwatch() {
+		global $alfred, $post;
+?>
+		<div id="stopwatch-clock"></div>
+		<p><?php _e( 'Record how long you have been working.', 'alfred' ); ?></p>
+<?php
+	}
 ?>
