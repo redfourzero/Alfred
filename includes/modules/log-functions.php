@@ -73,23 +73,32 @@ add_action( 'default_title', 'alfred_default_title' );
  *
  * @since Alfred 0.1
  */
-function alfred_stopwatch_start() {
+function alfred_stopwatch_update() {
 	global $post;
 	
 	$args = array(
 		'id' => absint( $_POST[ 'id' ] ),
+		'update' => $_POST[ 'update' ],
 		'stopwatch' => array(
-			'seconds' => $_POST[ 'seconds' ],
+			'hours'   => $_POST[ 'hours' ],
 			'minutes' => $_POST[ 'minutes' ],
-			'hours'   => $_POST[ 'hours' ]
+			'seconds' => $_POST[ 'seconds' ]
 		)
 	);
 	
-	update_post_meta( $args[ 'id' ], '_log_start', implode( ':', $args[ 'stopwatch' ] ) );
+	$time = implode( ':', $args[ 'stopwatch' ] );
 	
-	$result = array(
-		'message' => __( 'You&#39;re on the clock! Get to work.', 'alfred' )
-	);
+	if ( $args[ 'update' ] == 'start' ) {
+		update_post_meta( $args[ 'id' ], '_log_start', $time );
+		$result = array(
+			'message' => __( 'You&#39;re on the clock! Get to work.', 'alfred' )
+		);
+	} elseif( $args[ 'update' ] == 'end' ) {
+		update_post_meta( $args[ 'id' ], '_log_end', $time );
+		$result = array(
+			'message' => sprintf( __( 'Nice! You worked for %s', 'alfred' ), $time )
+		);
+	}
 	
 	echo json_encode( $result );
 	
@@ -97,6 +106,6 @@ function alfred_stopwatch_start() {
 	die();
 }
 if( is_user_logged_in() )
-	add_action( 'wp_ajax_alfred_stopwatch_start', 'alfred_stopwatch_start' );
+	add_action( 'wp_ajax_alfred_stopwatch_update', 'alfred_stopwatch_update' );
 else
-	add_action( 'wp_ajax_nopriv_alfred_stopwatch_start', 'alfred_stopwatch_start' );
+	add_action( 'wp_ajax_nopriv_alfred_stopwatch_update', 'alfred_stopwatch_update' );
