@@ -79,8 +79,8 @@ class Alfred {
 	}
 	
 	function _setup_files() {
-		foreach ( array( 'p2p', 'classes', 'options' ) as $file )
 		// Load the files
+		foreach ( array( 'p2p', 'classes', 'options' ) as $file )
 			require_once( STYLESHEETPATH . '/includes/' . $file . '.php' );
 
 		// Load the function and template files
