@@ -1,0 +1,18 @@
+/* Stopwatch */
+
+#stopwatch-clock {
+	overflow:hidden;
+}
+
+	#stopwatch-clock .display {
+		font-size:24px;
+		margin:4px 10px 2px 0; padding:10px;
+		background:#FFF;
+		border:1px solid #DFDFDF;
+		float:left;
+	}
+	
+	#stopwatch-clock input[type="button"] {
+		margin:15px 0 0 5px;
+		float:left;
+	}
