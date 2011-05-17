@@ -3,10 +3,12 @@ jQuery(document).ready(function($) {
 	
 	$( '#stopwatch-clock .start' ).click(function() {
 		var data = {
-			action	 : 'alfred_stopwatch_start',
+			action	 : 'alfred_stopwatch_update',
 			seconds  : $( '#stopwatch-clock .display .sec' ).html(),
 			minutes  : $( '#stopwatch-clock .display .min' ).html(),
-			hours    : $( '#stopwatch-clock .display .hr' ).html()
+			hours    : $( '#stopwatch-clock .display .hr' ).html(),
+			id		 : $( '#post_ID' ).val(),
+			update   : 'start'
 		};
 
 		$.post( ajaxurl, data, function( result ) {
@@ -16,7 +18,18 @@ jQuery(document).ready(function($) {
 	});
 	
 	$( '#stopwatch-clock .stop' ).click(function() {
-		alert( 'Stopwatch has been stopped.' );
+		var data = {
+			action	 : 'alfred_stopwatch_update',
+			seconds  : $( '#stopwatch-clock .display .sec' ).html(),
+			minutes  : $( '#stopwatch-clock .display .min' ).html(),
+			hours    : $( '#stopwatch-clock .display .hr' ).html(),
+			id		 : $( '#post_ID' ).val(),
+			update   : 'end'
+		};
+
+		$.post( ajaxurl, data, function( result ) {
+			$( '#stopwatch-clock .status' ).show().html( result.message );
+		}, 'json' );
 	});
 	
 	$( '#stopwatch-clock .reset' ).click(function() {
