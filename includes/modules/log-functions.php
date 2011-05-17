@@ -21,7 +21,7 @@ function alfred_log_post_type() {
 		$alfred->log_post_type,
 		array(
 			'labels' => array(
-				'name' => __( 'Time Logs', 'alfred' ),
+				'name' => __( 'Time Tracker', 'alfred' ),
 				'singular_name' => __( 'Log', 'alfred' ),
 				'add_new' => __( 'Add New', 'alfred' ),
 				'add_new_item' => __( 'Add New Log', 'alfred' ),
@@ -38,7 +38,7 @@ function alfred_log_post_type() {
 				'assign'
 			),
 			'rewrite' => array(
-				'slug' => 'task',
+				'slug' => 'log',
 				'with_front' => false
 			),
 			'taxonomies' => array(
@@ -48,7 +48,6 @@ function alfred_log_post_type() {
 			'menu_icon' => '',
 			'public' => true,
 			'show_ui' => true,
-			'show_in_menu' => 'edit.php?post_type=project',
 			'can_export' => true,
 			'capability_type' => 'post',
 			'query_var' => true
